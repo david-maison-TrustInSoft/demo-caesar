@@ -1,0 +1,9 @@
+[
+    {
+        "name": "Test shift values 7 and -3",
+        "prefix_path": "..",
+        "files": [ "main.c", "caesar.c" ],
+        "cpp-extra-args": "-I .",
+        "main": "main"
+    }
+]
