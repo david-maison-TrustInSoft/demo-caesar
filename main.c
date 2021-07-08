@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "caesar.h"
 
@@ -19,6 +20,19 @@ void gen_test(char *str, int str_len, int shift)
 
     free(res1);
     free(res2);
+}
+
+int main_with_input(int argc, char* argv[]) {
+    if ( argc != 3 ) return 1;
+
+    char* orig_str = argv[1];
+    int shift = atoi(argv[2]);
+    int str_len = strlen(orig_str) + 1;
+
+    printf("Test with a shift value of: %d\n", shift);
+    gen_test(orig_str, str_len, shift);
+
+    return 0;
 }
 
 int main(void)
