@@ -22,7 +22,36 @@ void gen_test(char *str, int str_len, int shift)
     free(res2);
 }
 
-int main_with_input(int argc, char* argv[]) {
+int main_with_filesystem() {
+    FILE *fp;
+    char *line1 = NULL;
+    char *line2 = NULL;
+    size_t len = 0;
+    ssize_t read;
+    int shift;
+    int str_len;
+
+    fp = fopen("/var/demo/caesar/test-suite.txt", "r");
+    if (fp == NULL) return 1;
+
+    while ((read = getline(&line1, &len, fp)) != -1) {
+        if ((read = getline(&line2, &len, fp)) == -1)
+            break;
+        shift = atoi(line2);
+        str_len = strlen(line1) + 1;
+
+        printf("Test with a shift value of: %d\n", shift);
+        gen_test(line1, str_len, shift);
+    }
+
+    fclose(fp);
+    if (line1) free(line1);
+    if (line2) free(line2);
+
+    return 0;
+}
+
+int main_with_input(int argc, char *argv[]) {
     if ( argc != 3 ) return 1;
 
     char* orig_str = argv[1];
