@@ -11,7 +11,7 @@ readonly MACHDEPS=(
   gcc_x86_64
 )
 
-test -e "$INPUT_FILE" || { echo "$INPUT_FILE not found."; exit 1; }
+test -e "$INPUT_FILE" || { echo "$INPUT_FILE not found"; exit 1; }
 
 results=()
 
@@ -28,4 +28,4 @@ done
 
 # Gather all configuration objects into a single one.
 touch .trustinsoft/config.json
-printf '%s\n' "${results[@]}" | jq '.[]' | jq -s > .trustinsoft/config.json
+{ printf '%s\n' "${results[@]}" | jq '.[]' | jq -s ;}  > .trustinsoft/config.json
