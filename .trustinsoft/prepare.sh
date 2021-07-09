@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 apt-get update
-apt-get install jq
+apt-get install lsb-release
 lsb_release -a
 readonly INPUT_FILE=".trustinsoft/orig_config.json"
 readonly MACHDEPS=(
@@ -27,4 +27,4 @@ for machdep in "${MACHDEPS[@]}"; do
 done
 
 # Gather all configuration objects into a single one.
-printf '%s\n' "${results[@]}" | jq '.[]' > .trustinsoft/config.json
+printf '%s\n' "${results[@]}" | jq '.[]' | jq --slurp > .trustinsoft/config.json
