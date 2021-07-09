@@ -2,6 +2,9 @@
 
 set -e
 
+apt-get update
+apt-get install minify
+
 readonly INPUT_FILE=".trustinsoft/orig_config.json"
 readonly MACHDEPS=(
   x86_32
@@ -15,13 +18,19 @@ test -e "$INPUT_FILE" || { echo "$INPUT_FILE not found"; exit 1; }
 results=()
 
 for machdep in "${MACHDEPS[@]}"; do
-  # Add the "machdep" field to each object and update the "name" field
-  # if it exists
-  res="$(jq \
+  # Use "minify --type js" to pre-process comments. Then, for each
+  # object, add the "machdep" field and update the "name" field.
+  res=$(minify --type js "$INPUT_FILE" | \
+        jq \
           --arg mach "$machdep" \
           'map(. + { "machdep": $mach }) |
-           map(if has("name") then . + { "name": (.name + " - " + $mach) } else . end)' \
-          "$INPUT_FILE")"
+           to_entries |
+           map(
+             if has("name") then
+               .value + { "name": (.value.name + " - " + $mach) }
+             else
+               .value + { "name": ("Test " + (.key + 1 | tostring) + " - " + $mach) } end)' \
+          "$INPUT_FILE")
   results+=( "$res" )
 done
 
