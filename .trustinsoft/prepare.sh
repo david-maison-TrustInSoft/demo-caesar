@@ -29,8 +29,7 @@ for machdep in "${MACHDEPS[@]}"; do
              if has("name") then
                .value + { "name": (.value.name + " - " + $mach) }
              else
-               .value + { "name": ("Test " + (.key + 1 | tostring) + " - " + $mach) } end)' \
-          "$INPUT_FILE")
+               .value + { "name": ("Test " + (.key + 1 | tostring) + " - " + $mach) } end)')
   results+=( "$res" )
 done
 
