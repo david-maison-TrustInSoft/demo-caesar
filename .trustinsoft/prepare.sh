@@ -34,6 +34,4 @@ for machdep in "${MACHDEPS[@]}"; do
 done
 
 # Gather all configuration objects into a single one.
-res="$(printf '%s\n' "${results[@]}" | jq '.[]')"
-res="$(echo "$res" | jq -s '.')"
-echo "$res" > .trustinsoft/config.json
+printf '%s\n' "${results[@]}" | jq '.[]' | jq -s '.' > .trustinsoft/config.json

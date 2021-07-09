@@ -1,13 +1,13 @@
 [
   {
     // Test shift values 7 and -3
-    "files": [ "main.c", "caesar.c" ],
-    "cpp-extra-args": "-I ."
+    "files": [ "../main.c", "../caesar.c" ],
+    "cpp-extra-args": "-I .."
   },
   {
     "name": "Test from program inputs",
-    "files": [ "main.c", "caesar.c" ],
-    "cpp-extra-args": "-I .",
+    "files": [ "../main.c", "../caesar.c" ],
+    "cpp-extra-args": "-I ..",
     "main": "main_with_input",
     "val-program-name": "a.out",
     "val-args": "|People of Earth, your attention please|7"
