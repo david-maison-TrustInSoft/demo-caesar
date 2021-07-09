@@ -26,7 +26,7 @@ for machdep in "${MACHDEPS[@]}"; do
           'map(. + { "machdep": $mach }) |
            to_entries |
            map(
-             if has("name") then
+             if getpath([ "value", "name" ]) != null then
                .value + { "name": (.value.name + " - " + $mach) }
              else
                .value + { "name": ("Test " + (.key + 1 | tostring) + " - " + $mach) } end)')
