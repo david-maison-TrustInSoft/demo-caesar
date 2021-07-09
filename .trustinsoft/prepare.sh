@@ -20,16 +20,16 @@ results=()
 for machdep in "${MACHDEPS[@]}"; do
   # Use "minify --type js" to pre-process comments. Then, for each
   # object, add the "machdep" field and update the "name" field.
-  res=$(minify --type js "$INPUT_FILE" | \
-        jq \
-          --arg mach "$machdep" \
-          'map(. + { "machdep": $mach }) |
-           to_entries |
-           map(
-             if getpath([ "value", "name" ]) != null then
-               .value + { "name": (.value.name + " - " + $mach) }
-             else
-               .value + { "name": ("Test " + (.key + 1 | tostring) + " - " + $mach) } end)')
+  res="$(minify --type js "$INPUT_FILE" | \
+         jq \
+           --arg mach "$machdep" \
+           'map(. + { "machdep": $mach }) |
+            to_entries |
+            map(
+              if getpath([ "value", "name" ]) != null then
+                .value + { "name": (.value.name + " - " + $mach) }
+              else
+                .value + { "name": ("Test " + (.key + 1 | tostring) + " - " + $mach) } end)')"
   results+=( "$res" )
 done
 
