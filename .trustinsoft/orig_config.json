@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Test shift values 7 and -3",
+  },
+  {
+    "name": "Test from program inputs",
+    "main": "main_with_input",
+    "val-program-name": "a.out",
+    "val-args": "|People of Earth, your attention please|7"
+  }
+]
+
+/* Options to factorize:
+
+   "files": [ "caesar.c", "main.c" ]
+   "cpp-extra-args": "-I ."
+   "prefix_path": ".."
+*/

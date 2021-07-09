@@ -1,6 +1,0 @@
-{
-    "prefix_path": "..",
-    "files": [ "caesar.c", "main.c" ],
-    "cpp-extra-args": "-I .",
-    "main": "main"
-}
