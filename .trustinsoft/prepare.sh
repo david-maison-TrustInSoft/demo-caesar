@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
-# apt-get update
-# apt-get install jq
+apt-get update
+apt-get install jq
 
 readonly INPUT_FILE=".trustinsoft/orig_config.json"
 readonly MACHDEPS=(
@@ -27,5 +27,4 @@ for machdep in "${MACHDEPS[@]}"; do
 done
 
 # Gather all configuration objects into a single one.
-touch .trustinsoft/config.json
-{ printf '%s\n' "${results[@]}" | jq '.[]' | jq -s ;}  > .trustinsoft/config.json
+printf '%s\n' "${results[@]}" | jq '.[]' | jq -s > .trustinsoft/config.json
