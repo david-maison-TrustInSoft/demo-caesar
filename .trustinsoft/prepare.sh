@@ -2,9 +2,6 @@
 
 set -e
 
-apt-get update
-apt-get install -y lsb-release
-lsb_release -a
 readonly INPUT_FILE=".trustinsoft/orig_config.json"
 readonly MACHDEPS=(
   x86_32
@@ -29,5 +26,6 @@ for machdep in "${MACHDEPS[@]}"; do
 done
 
 # Gather all configuration objects into a single one.
-res="$(printf '%s\n' "${results[@]}" | jq '.[]' | jq -s)"
+res="$(printf '%s\n' "${results[@]}" | jq '.[]')"
+res="$(echo "$res" | jq -s)"
 echo "$res" > .trustinsoft/config.json
