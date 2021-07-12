@@ -2,8 +2,8 @@
 
 set -e
 
-# apt-get update
-# apt-get install minify
+apt-get update
+apt-get install minify
 
 readonly INPUT_FILE=".trustinsoft/orig_config.json"
 readonly COMMON_OPTIONS='{
@@ -12,10 +12,8 @@ readonly COMMON_OPTIONS='{
    "prefix_path": ".."
 }'
 
-echo $COMMON_OPTIONS
-
 test -e "$INPUT_FILE" || { echo "$INPUT_FILE not found"; exit 1; }
 
 minify --type js "$INPUT_FILE" \
-  | jq --argjson common "$COMMON_OPTIONS" '.' \
+  | jq --argjson common "$COMMON_OPTIONS" 'map($common + .)' \
   > .trustinsoft/config.json
