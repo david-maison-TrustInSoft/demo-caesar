@@ -2,10 +2,7 @@
 
 set -e
 
-apt-get update
-apt-get install minify
-
-readonly INPUT_FILE="orig_config.json"
+readonly INPUT_FILE=".trustinsoft/orig_config.json"
 readonly MACHDEPS=(
   x86_32
   x86_64
@@ -34,4 +31,4 @@ for machdep in "${MACHDEPS[@]}"; do
 done
 
 # Gather all configuration objects into a single one.
-printf '%s\n' "${results[@]}" | jq '.[]' | jq -s '.' > config.json
+printf '%s\n' "${results[@]}" | jq '.[]' | jq -s '.' > .trustinsoft/config.json
